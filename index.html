@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Välja – Smarta ekonomiverktyg</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 50% -20%, #26354f 0%, #11151d 42%, #090b10 75%);
+            color: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        header {
+            height: 76px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(9,11,16,0.65);
+            backdrop-filter: blur(16px);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #7dd3fc;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+
+            padding: 105px 25px 70px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 14px;
+
+            border: 1px solid rgba(125,211,252,0.25);
+            background: rgba(125,211,252,0.07);
+
+            color: #7dd3fc;
+
+            border-radius: 999px;
+
+            font-size: 13px;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 7vw, 78px);
+
+            line-height: 0.98;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #7dd3fc;
+        }
+
+        .hero p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #9ca3af;
+
+            font-size: 19px;
+
+            line-height: 1.6;
+        }
+
+        .tools {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding: 20px 25px 100px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #737b89;
+        }
+
+        .cards {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 22px;
+        }
+
+        .card {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 34px;
+
+            min-height: 280px;
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 22px;
+
+            background: rgba(255,255,255,0.045);
+
+            backdrop-filter: blur(12px);
+
+            transition:
+                transform 0.25s,
+                border-color 0.25s,
+                background 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+
+            border-color: rgba(125,211,252,0.35);
+
+            background: rgba(255,255,255,0.065);
+        }
+
+        .icon {
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: rgba(125,211,252,0.1);
+
+            font-size: 24px;
+
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            font-size: 25px;
+
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #8d96a5;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+        .card button {
+            border: none;
+
+            padding: 13px 20px;
+
+            border-radius: 10px;
+
+            background: #f5f7fa;
+
+            color: #0b0d11;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .card button:hover {
+            transform: scale(1.03);
+
+            background: #7dd3fc;
+        }
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            border-top: 1px solid rgba(255,255,255,0.07);
+
+            color: #5f6774;
+
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        VÄL<span>JA</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Hem</a>
+        <a href="skatt.html">Skatt</a>
+        <a href="aktier.html">Aktier</a>
+        <a href="bolan.html">Bolån</a>
+    </nav>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="badge">
+        SMARTARE EKONOMI • ENKLARE BESLUT
+    </div>
+
+    <h1>
+        Ha koll på<br>
+        <span>dina pengar.</span>
+    </h1>
+
+    <p>
+        Enkla och kraftfulla verktyg för att förstå,
+        planera och förbättra din ekonomi.
+    </p>
+
+</section>
+
+
+<section class="tools">
+
+    <div class="section-title">
+
+        <h2>Våra verktyg</h2>
+
+        <p>
+            Välj vad du vill räkna på.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+
+        <!-- 1. SKATT -->
+
+        <div class="card">
+
+            <div class="icon">🧾</div>
+
+            <h3>Skattkalkylator</h3>
+
+            <p>
+                Räkna ut ungefär hur mycket skatt du
+                behöver betala och vad du får kvar.
+            </p>
+
+            <button onclick="window.location.href='skatt.html'">
+                Öppna kalkylator →
+            </button>
+
+        </div>
+
+
+        <!-- 2. AKTIER -->
+
+        <div class="card">
+
+            <div class="icon">📈</div>
+
+            <h3>Aktiekalkylator</h3>
+
+            <p>
+                Se hur mycket du tjänar eller förlorar
+                om en aktie stiger eller sjunker.
+            </p>
+
+            <button onclick="window.location.href='aktier.html'">
+                Öppna kalkylator →
+            </button>
+
+        </div>
+
+
+        <!-- 3. BOLÅN -->
+
+        <div class="card">
+
+            <div class="icon">🏠</div>
+
+            <h3>Bolånekalkylator</h3>
+
+            <p>
+                Räkna på månadskostnaden för ditt bolån
+                och se hur räntan påverkar ekonomin.
+            </p>
+
+            <button onclick="window.location.href='bolan.html'">
+                Öppna kalkylator →
+            </button>
+
+        </div>
+
+
+        <!-- 4. BUDGET -->
+
+        <div class="card">
+
+            <div class="icon">💰</div>
+
+            <h3>Budgetkalkylator</h3>
+
+            <p>
+                Få koll på inkomster, utgifter och hur
+                mycket pengar du har kvar varje månad.
+            </p>
+
+           <button onclick="window.location.href='min-ekonomi.html'">
+               Öppna kalkylator →
+            </button>
+
+        </div>
+
+
+        <!-- 5. SPARMÅL -->
+
+        <div class="card">
+
+            <div class="icon">🎯</div>
+
+            <h3>Sparmål</h3>
+
+            <p>
+                Räkna ut hur mycket du behöver spara varje
+                månad för att nå ditt mål.
+            </p>
+
+            <button onclick="window.location.href='sparmal.html'">
+                Öppna verktyg →
+            </button>
+
+        </div>
+
+
+        <!-- 6. RÄNTA PÅ RÄNTA -->
+
+        <div class="card">
+
+            <div class="icon">📊</div>
+
+            <h3>Ränta på ränta</h3>
+
+            <p>
+                Se hur dina pengar kan växa över tid
+                med regelbundet sparande.
+            </p>
+
+            <button onclick="window.location.href='rantaparante.html'">
+                Öppna kalkylator →
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    © 2026 Välja · Smarta verktyg för din ekonomi
+
+</footer>
+
+
+</body>
+</html>
+```

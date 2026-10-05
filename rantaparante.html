@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Välja – Ränta på ränta</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 50% -20%, #26354f 0%, #11151d 42%, #090b10 75%);
+            color: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        header {
+            height: 76px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(9,11,16,0.65);
+            backdrop-filter: blur(16px);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #7dd3fc;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 70px 25px 100px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #9ca3af;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: white;
+        }
+
+        h1 {
+            font-size: 48px;
+            letter-spacing: -2px;
+            margin-bottom: 12px;
+        }
+
+        .intro {
+            color: #9ca3af;
+            font-size: 18px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .calculator {
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 22px;
+            padding: 35px;
+        }
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d1d5db;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(0,0,0,0.25);
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #7dd3fc;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 11px;
+            background: #f5f7fa;
+            color: #0b0d11;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            background: #7dd3fc;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 16px;
+            background: rgba(125,211,252,0.08);
+            border: 1px solid rgba(125,211,252,0.2);
+            display: none;
+        }
+
+        .result h2 {
+            margin-bottom: 20px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+        }
+
+        .big-result {
+            font-size: 32px;
+            font-weight: 800;
+            color: #7dd3fc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            color: #5f6774;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                display: none;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+            .calculator {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        VÄL<span>JA</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Hem</a>
+        <a href="skatt.html">Skatt</a>
+        <a href="aktier.html">Aktier</a>
+        <a href="bolan.html">Bolån</a>
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+    <a class="back" href="index.html">← Tillbaka till Välja</a>
+
+    <h1>Ränta på ränta</h1>
+
+    <p class="intro">
+        Se hur ditt sparande kan växa över tid när både
+        dina pengar och avkastningen börjar ge avkastning.
+    </p>
+
+
+    <div class="calculator">
+
+        <div class="field">
+            <label for="start">Startkapital (kr)</label>
+            <input type="number" id="start" value="10000">
+        </div>
+
+        <div class="field">
+            <label for="monthly">Månadssparande (kr)</label>
+            <input type="number" id="monthly" value="1000">
+        </div>
+
+        <div class="field">
+            <label for="interest">Förväntad årlig avkastning (%)</label>
+            <input type="number" id="interest" value="7" step="0.1">
+        </div>
+
+        <div class="field">
+            <label for="years">Antal år</label>
+            <input type="number" id="years" value="10">
+        </div>
+
+        <button onclick="calculate()">
+            Räkna ut
+        </button>
+
+
+        <div class="result" id="result">
+
+            <h2>Resultat</h2>
+
+            <div class="result-row">
+                <span>Insatt kapital</span>
+                <strong id="deposited"></strong>
+            </div>
+
+            <div class="result-row">
+                <span>Avkastning</span>
+                <strong id="profit"></strong>
+            </div>
+
+            <div class="result-row">
+                <span>Värde efter perioden</span>
+                <strong class="big-result" id="total"></strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 Välja · Smarta verktyg för din ekonomi
+</footer>
+
+
+<script>
+
+function calculate() {
+
+    const start = Number(document.getElementById("start").value);
+    const monthly = Number(document.getElementById("monthly").value);
+    const annualInterest = Number(document.getElementById("interest").value);
+    const years = Number(document.getElementById("years").value);
+
+    if (
+        start < 0 ||
+        monthly < 0 ||
+        annualInterest < 0 ||
+        years <= 0
+    ) {
+        alert("Kontrollera att du fyllt i giltiga värden.");
+        return;
+    }
+
+    const monthlyInterest =
+        Math.pow(1 + annualInterest / 100, 1 / 12) - 1;
+
+    const months = years * 12;
+
+    let balance = start;
+
+    for (let i = 0; i < months; i++) {
+
+        balance = balance * (1 + monthlyInterest);
+
+        balance += monthly;
+    }
+
+    const deposited =
+        start + (monthly * months);
+
+    const profit =
+        balance - deposited;
+
+
+    document.getElementById("deposited").textContent =
+        deposited.toLocaleString("sv-SE") + " kr";
+
+    document.getElementById("profit").textContent =
+        profit.toLocaleString("sv-SE", {
+            maximumFractionDigits: 0
+        }) + " kr";
+
+    document.getElementById("total").textContent =
+        balance.toLocaleString("sv-SE", {
+            maximumFractionDigits: 0
+        }) + " kr";
+
+
+    document.getElementById("result").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
+```

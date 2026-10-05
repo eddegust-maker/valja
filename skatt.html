@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Skattkalkylator — Ekonomi</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 50% -20%, #26354f 0%, #11151d 42%, #090b10 75%);
+    color: #f5f7fa;
+    min-height: 100vh;
+}
+
+header {
+    height: 76px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(9,11,16,0.65);
+    backdrop-filter: blur(16px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #7dd3fc;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 70px 25px 100px;
+}
+
+.back {
+    color: #7dd3fc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 52px;
+    margin-top: 25px;
+    letter-spacing: -2px;
+}
+
+.intro {
+    color: #8d96a5;
+    margin-top: 12px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.calculator {
+    margin-top: 50px;
+    padding: 35px;
+
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 22px;
+
+    backdrop-filter: blur(12px);
+}
+
+.calculator h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.description {
+    color: #8d96a5;
+    margin-bottom: 30px;
+}
+
+.company-types {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.company-type {
+    padding: 20px;
+
+    background: #0d1016;
+    border: 1px solid #303641;
+    border-radius: 14px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.company-type:hover {
+    border-color: #7dd3fc;
+}
+
+.company-type.active {
+    border-color: #7dd3fc;
+    background: rgba(125,211,252,0.08);
+}
+
+.company-type h3 {
+    margin-bottom: 7px;
+}
+
+.company-type p {
+    color: #737b89;
+    font-size: 13px;
+}
+
+.inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.extra-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    color: #cbd0d8;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 15px;
+
+    background: #0d1016;
+    border: 1px solid #303641;
+    border-radius: 11px;
+
+    color: white;
+    font-size: 16px;
+
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #7dd3fc;
+}
+
+select {
+    cursor: pointer;
+}
+
+.calculate {
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px;
+
+    border: none;
+    border-radius: 11px;
+
+    background: #f5f7fa;
+    color: #0b0d11;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.calculate:hover {
+    background: #7dd3fc;
+}
+
+.result {
+    display: none;
+
+    margin-top: 30px;
+    padding: 30px;
+
+    border-radius: 18px;
+
+    background: rgba(125,211,252,0.06);
+    border: 1px solid rgba(125,211,252,0.16);
+}
+
+.result-title {
+    color: #8d96a5;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.big-number {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.result-box {
+    padding: 18px;
+    background: rgba(0,0,0,0.18);
+    border-radius: 12px;
+}
+
+.result-box p {
+    color: #7f8794;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.result-box strong {
+    font-size: 19px;
+}
+
+.details {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 0;
+    color: #aeb5c0;
+    font-size: 14px;
+}
+
+.detail-row strong {
+    color: white;
+}
+
+.notice {
+    margin-top: 25px;
+    color: #687180;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 0 20px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .company-types,
+    .inputs,
+    .extra-inputs,
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calculator {
+        padding: 24px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<header>
+
+<div class="logo">
+    EKO<span>NOMI</span>
+</div>
+
+<nav>
+    <a href="index.html">Hem</a>
+    <a href="skatt.html">Skatt</a>
+    <a href="aktier.html">Aktier</a>
+</nav>
+
+</header>
+
+
+<div class="container">
+
+<a class="back" href="index.html">← Tillbaka</a>
+
+<h1>Skatt</h1>
+
+<p class="intro">
+    Räkna på företagets resultat och få en uppskattning
+    av skatt och vad som blir kvar.
+</p>
+
+
+<div class="calculator">
+
+<h2>🧾 Skattkalkylator</h2>
+
+<p class="description">
+    Välj företagsform och fyll i dina uppgifter.
+</p>
+
+
+<div class="company-types">
+
+<div
+    class="company-type active"
+    id="enskild"
+    onclick="selectCompany('enskild')"
+>
+    <h3>👤 Enskild firma</h3>
+
+    <p>
+        Beräkning för aktiv enskild näringsverksamhet.
+    </p>
+</div>
+
+
+<div
+    class="company-type"
+    id="ab"
+    onclick="selectCompany('ab')"
+>
+    <h3>🏢 Aktiebolag</h3>
+
+    <p>
+        Enkel beräkning av bolagets skatt.
+    </p>
+</div>
+
+</div>
+
+
+<div class="inputs">
+
+<div>
+
+<label for="revenue">
+    Omsättning (kr)
+</label>
+
+<input
+    type="number"
+    id="revenue"
+    placeholder="1200000"
+    min="0"
+>
+
+</div>
+
+
+<div>
+
+<label for="costs">
+    Kostnader (kr)
+</label>
+
+<input
+    type="number"
+    id="costs"
+    placeholder="400000"
+    min="0"
+>
+
+</div>
+
+</div>
+
+
+<div class="extra-inputs">
+
+<div>
+
+<label for="age">
+    Ålder
+</label>
+
+<input
+    type="number"
+    id="age"
+    placeholder="23"
+    min="1"
+    max="120"
+>
+
+</div>
+
+
+<div>
+
+<label for="municipality">
+    Kommun
+</label>
+
+<select id="municipality">
+
+<option value="0.3238">
+    Välj kommun
+</option>
+
+<option value="0.3124">
+    Västerås — 31,24 %
+</option>
+
+<option value="0.3055">
+    Stockholm — 30,55 %
+</option>
+
+<option value="0.3384">
+    Luleå — 33,84 %
+</option>
+
+<option value="0.3465">
+    Umeå — 34,65 %
+</option>
+
+<option value="0.3260">
+    Göteborg — 32,60 %
+</option>
+
+<option value="0.3242">
+    Malmö — 32,42 %
+</option>
+
+<option value="0.3377">
+    Gävle — 33,77 %
+</option>
+
+<option value="0.3394">
+    Boden — 33,94 %
+</option>
+
+<option value="0.3329">
+    Arboga — 33,29 %
+</option>
+
+<option value="0.3375">
+    Sundsvall — 33,88 %
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<button
+    class="calculate"
+    onclick="calculateTax()"
+>
+    Räkna ut
+</button>
+
+
+<div class="result" id="result">
+
+<div class="result-title">
+    Resultat före skatt
+</div>
+
+<div
+    class="big-number"
+    id="profit"
+>
+    0 kr
+</div>
+
+
+<div class="result-grid">
+
+<div class="result-box">
+
+<p>Beräknad skatt</p>
+
+<strong id="tax">
+    0 kr
+</strong>
+
+</div>
+
+
+<div class="result-box">
+
+<p>Kvar efter skatt</p>
+
+<strong id="afterTax">
+    0 kr
+</strong>
+
+</div>
+
+
+<div class="result-box">
+
+<p>Effektiv skatt</p>
+
+<strong id="effective">
+    0 %
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="details">
+
+<div class="detail-row">
+    <span>Egenavgifter</span>
+    <strong id="socialTax">0 kr</strong>
+</div>
+
+<div class="detail-row">
+    <span>Kommunal skatt</span>
+    <strong id="municipalTax">0 kr</strong>
+</div>
+
+<div class="detail-row">
+    <span>Statlig skatt</span>
+    <strong id="stateTax">0 kr</strong>
+</div>
+
+<div class="detail-row">
+    <span>Ålder</span>
+    <strong id="ageResult">-</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="notice">
+    Beräkningen är en uppskattning och ska inte användas
+    som underlag för deklaration eller slutlig skattebetalning.
+    Kommunalskattesatserna är baserade på SCB:s uppgifter för 2026.
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let companyType = "enskild";
+
+
+function selectCompany(type) {
+
+    companyType = type;
+
+    document
+        .getElementById("enskild")
+        .classList.remove("active");
+
+    document
+        .getElementById("ab")
+        .classList.remove("active");
+
+    document
+        .getElementById(type)
+        .classList.add("active");
+}
+
+
+function calculateTax() {
+
+    const revenue =
+        Number(document.getElementById("revenue").value);
+
+    const costs =
+        Number(document.getElementById("costs").value);
+
+    const age =
+        Number(document.getElementById("age").value);
+
+    const municipalityRate =
+        Number(document.getElementById("municipality").value);
+
+
+    if (!revenue || revenue <= 0) {
+
+        alert("Skriv in omsättningen.");
+
+        return;
+    }
+
+
+    if (costs < 0) {
+
+        alert("Kostnader kan inte vara negativa.");
+
+        return;
+    }
+
+
+    if (!age || age < 1) {
+
+        alert("Skriv in din ålder.");
+
+        return;
+    }
+
+
+    const profit =
+        revenue - costs;
+
+
+    let totalTax = 0;
+    let socialTax = 0;
+    let municipalTax = 0;
+    let stateTax = 0;
+
+
+    /*
+        AKTIEBOLAG
+        Bolagsskatt 20,6 %
+    */
+
+    if (companyType === "ab") {
+
+        totalTax =
+            Math.max(0, profit * 0.206);
+
+    }
+
+
+    /*
+        ENSKILD FIRMA
+        Förenklad 2026-modell.
+    */
+
+    else {
+
+        if (profit > 0) {
+
+            /*
+                Egenavgifter.
+                För personer som omfattas av
+                fulla egenavgifter används 28,97 %.
+            */
+
+            socialTax =
+                profit * 0.2897;
+
+
+            /*
+                Schablonavdrag för egenavgifter.
+            */
+
+            const deduction =
+                profit * 0.25;
+
+
+            const incomeBeforeBasicDeduction =
+                Math.max(
+                    0,
+                    profit - deduction
+                );
+
+
+            /*
+                Förenklad grundavdragsmodell.
+            */
+
+            let basicDeduction;
+
+
+            if (incomeBeforeBasicDeduction <= 25100) {
+
+                basicDeduction =
+                    incomeBeforeBasicDeduction;
+
+            }
+
+            else if (incomeBeforeBasicDeduction <= 58000) {
+
+                basicDeduction = 25100;
+
+            }
+
+            else if (incomeBeforeBasicDeduction <= 200000) {
+
+                basicDeduction =
+                    25100 +
+                    (incomeBeforeBasicDeduction - 58000) * 0.25;
+
+            }
+
+            else if (incomeBeforeBasicDeduction <= 400000) {
+
+                basicDeduction =
+                    60600 -
+                    (incomeBeforeBasicDeduction - 200000) * 0.075;
+
+            }
+
+            else {
+
+                basicDeduction = 45600;
+            }
+
+
+            const taxableIncome =
+                Math.max(
+                    0,
+                    incomeBeforeBasicDeduction -
+                    basicDeduction
+                );
+
+
+            /*
+                Kommunal skatt.
+            */
+
+            municipalTax =
+                taxableIncome *
+                municipalityRate;
+
+
+            /*
+                Statlig skatt.
+            */
+
+            stateTax =
+                Math.max(
+                    0,
+                    taxableIncome - 643000
+                ) * 0.20;
+
+
+            totalTax =
+                socialTax +
+                municipalTax +
+                stateTax;
+        }
+    }
+
+
+    const afterTax =
+        profit - totalTax;
+
+
+    const effectiveTax =
+        profit > 0
+            ? (totalTax / profit) * 100
+            : 0;
+
+
+    document.getElementById("profit").innerText =
+        Math.round(profit)
+            .toLocaleString("sv-SE") + " kr";
+
+
+    document.getElementById("tax").innerText =
+        Math.round(totalTax)
+            .toLocaleString("sv-SE") + " kr";
+
+
+    document.getElementById("afterTax").innerText =
+        Math.round(afterTax)
+            .toLocaleString("sv-SE") + " kr";
+
+
+    document.getElementById("effective").innerText =
+        effectiveTax.toFixed(1) + " %";
+
+
+    document.getElementById("socialTax").innerText =
+        Math.round(socialTax)
+            .toLocaleString("sv-SE") + " kr";
+
+
+    document.getElementById("municipalTax").innerText =
+        Math.round(municipalTax)
+            .toLocaleString("sv-SE") + " kr";
+
+
+    document.getElementById("stateTax").innerText =
+        Math.round(stateTax)
+            .toLocaleString("sv-SE") + " kr";
+
+
+    document.getElementById("ageResult").innerText =
+        age + " år";
+
+
+    document.getElementById("result").style.display =
+        "block";
+}
+
+</script>
+
+</body>
+</html>

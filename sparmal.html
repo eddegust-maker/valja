@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparmål — Ekonomi</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 50% -20%, #26354f 0%, #11151d 42%, #090b10 75%);
+            color: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        header {
+            height: 76px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(9,11,16,0.65);
+            backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #7dd3fc;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 70px 25px 100px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .intro h1 {
+            font-size: 52px;
+            margin-bottom: 15px;
+        }
+
+        .intro h1 span {
+            color: #7dd3fc;
+        }
+
+        .intro p {
+            color: #8d96a5;
+            font-size: 18px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .box {
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 22px;
+            background: rgba(255,255,255,0.045);
+            backdrop-filter: blur(12px);
+        }
+
+        .box h2 {
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #b8c0cc;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.25);
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #7dd3fc;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 8px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #f5f7fa;
+            color: #0b0d11;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #7dd3fc;
+        }
+
+        .result {
+            padding: 25px;
+            border-radius: 16px;
+            background: rgba(125,211,252,0.08);
+            border: 1px solid rgba(125,211,252,0.18);
+            margin-bottom: 25px;
+        }
+
+        .result-title {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .money {
+            font-size: 38px;
+            font-weight: 800;
+            color: #7dd3fc;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            color: #aeb6c2;
+        }
+
+        .summary-row strong {
+            color: white;
+        }
+
+        .progress-section {
+            margin-top: 28px;
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: #7dd3fc;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+        }
+
+        .tip {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.04);
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 750px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .intro h1 {
+                font-size: 40px;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        EKO<span>NOMI</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Hem</a>
+        <a href="skatt.html">Skatt</a>
+        <a href="aktier.html">Aktier</a>
+        <a href="bolan.html">Bolån</a>
+        <a href="min-ekonomi.html">Min ekonomi</a>
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+    <div class="intro">
+
+        <h1>
+            Nå ditt <span>sparmål</span>
+        </h1>
+
+        <p>
+            Se hur lång tid det tar att nå ditt ekonomiska mål.
+        </p>
+
+    </div>
+
+
+    <div class="layout">
+
+        <div class="box">
+
+            <h2>Ditt sparmål</h2>
+
+            <div class="input-group">
+                <label>Sparmål</label>
+                <input
+                    type="number"
+                    id="mal"
+                    placeholder="t.ex. 50000"
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Hur mycket har du redan?</label>
+                <input
+                    type="number"
+                    id="start"
+                    placeholder="t.ex. 10000"
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Du sparar varje månad</label>
+                <input
+                    type="number"
+                    id="manad"
+                    placeholder="t.ex. 2500"
+                >
+            </div>
+
+            <button onclick="raknaSparmal()">
+                Räkna ut mitt sparmål →
+            </button>
+
+        </div>
+
+
+        <div class="box">
+
+            <h2>Ditt resultat</h2>
+
+            <div class="result">
+
+                <div class="result-title">
+                    Tid kvar till målet
+                </div>
+
+                <div class="money" id="tid">
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="summary-row">
+                <span>Sparmål</span>
+                <strong id="visMal">0 kr</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Redan sparat</span>
+                <strong id="visStart">0 kr</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Kvar att spara</span>
+                <strong id="visKvar">0 kr</strong>
+            </div>
+
+
+            <div class="progress-section">
+
+                <div class="progress-top">
+                    <span>Framsteg</span>
+                    <span id="procent">0%</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+
+            </div>
+
+
+            <div class="tip" id="tips">
+                Fyll i dina uppgifter så räknar vi ut hur lång tid ditt sparmål tar.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function raknaSparmal() {
+
+    const mal =
+        Number(document.getElementById("mal").value) || 0;
+
+    const start =
+        Number(document.getElementById("start").value) || 0;
+
+    const manad =
+        Number(document.getElementById("manad").value) || 0;
+
+
+    const kvar =
+        Math.max(mal - start, 0);
+
+
+    document.getElementById("visMal").textContent =
+        mal.toLocaleString("sv-SE") + " kr";
+
+
+    document.getElementById("visStart").textContent =
+        start.toLocaleString("sv-SE") + " kr";
+
+
+    document.getElementById("visKvar").textContent =
+        kvar.toLocaleString("sv-SE") + " kr";
+
+
+    if (mal <= 0) {
+
+        document.getElementById("tid").textContent = "—";
+
+        document.getElementById("tips").textContent =
+            "Skriv in ett sparmål.";
+
+        return;
+    }
+
+
+    if (start >= mal) {
+
+        document.getElementById("tid").textContent =
+            "Klart! 🎉";
+
+        document.getElementById("procent").textContent =
+            "100%";
+
+        document.getElementById("progress").style.width =
+            "100%";
+
+        document.getElementById("tips").textContent =
+            "Du har redan nått ditt sparmål!";
+
+        return;
+    }
+
+
+    if (manad <= 0) {
+
+        document.getElementById("tid").textContent =
+            "—";
+
+        document.getElementById("tips").textContent =
+            "Du behöver ange hur mycket du sparar varje månad.";
+
+        return;
+    }
+
+
+    const manader =
+        Math.ceil(kvar / manad);
+
+
+    const ar =
+        Math.floor(manader / 12);
+
+    const resterandeManader =
+        manader % 12;
+
+
+    let tidText = "";
+
+
+    if (ar > 0) {
+        tidText += ar + (ar === 1 ? " år" : " år");
+    }
+
+    if (resterandeManader > 0) {
+
+        if (tidText !== "") {
+            tidText += " och ";
+        }
+
+        tidText +=
+            resterandeManader +
+            (resterandeManader === 1 ? " månad" : " månader");
+    }
+
+
+    document.getElementById("tid").textContent =
+        tidText;
+
+
+    const procent =
+        Math.min((start / mal) * 100, 100);
+
+
+    document.getElementById("procent").textContent =
+        Math.round(procent) + "%";
+
+
+    document.getElementById("progress").style.width =
+        procent + "%";
+
+
+    document.getElementById("tips").textContent =
+        "Om du fortsätter spara " +
+        manad.toLocaleString("sv-SE") +
+        " kr varje månad når du ditt mål om ungefär " +
+        manader +
+        " månader.";
+
+}
+
+</script>
+
+</body>
+</html>

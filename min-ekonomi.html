@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min ekonomi</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 50% -20%, #26354f 0%, #11151d 42%, #090b10 75%);
+            color: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        header {
+            height: 76px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(9,11,16,0.65);
+            backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #7dd3fc;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .intro h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .intro h1 span {
+            color: #7dd3fc;
+        }
+
+        .intro p {
+            color: #8d96a5;
+            font-size: 18px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .box {
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 22px;
+            background: rgba(255,255,255,0.045);
+            backdrop-filter: blur(12px);
+        }
+
+        .box h2 {
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #b8c0cc;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.25);
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #7dd3fc;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #f5f7fa;
+            color: #0b0d11;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #7dd3fc;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 25px;
+            border-radius: 16px;
+            background: rgba(125,211,252,0.08);
+            border: 1px solid rgba(125,211,252,0.18);
+        }
+
+        .result-title {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .money {
+            font-size: 38px;
+            font-weight: 800;
+            color: #7dd3fc;
+        }
+
+        .summary {
+            margin-top: 25px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            color: #aeb6c2;
+        }
+
+        .summary-row strong {
+            color: white;
+        }
+
+        .tip {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.04);
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 750px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .intro h1 {
+                font-size: 38px;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">EKO<span>NOMI</span></div>
+
+    <nav>
+        <a href="index.html">Hem</a>
+        <a href="skatt.html">Skatt</a>
+        <a href="aktier.html">Aktier</a>
+        <a href="bolan.html">Bolån</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <div class="intro">
+        <h1>Min <span>ekonomi</span></h1>
+        <p>Se hur mycket pengar du faktiskt har kvar varje månad.</p>
+    </div>
+
+    <div class="layout">
+
+        <div class="box">
+
+            <h2>Din ekonomi</h2>
+
+            <div class="input-group">
+                <label>Månadsinkomst efter skatt</label>
+                <input type="number" id="inkomst" placeholder="t.ex. 30000">
+            </div>
+
+            <div class="input-group">
+                <label>Boende</label>
+                <input type="number" id="boende" placeholder="t.ex. 9000">
+            </div>
+
+            <div class="input-group">
+                <label>Bil</label>
+                <input type="number" id="bil" placeholder="t.ex. 4000">
+            </div>
+
+            <div class="input-group">
+                <label>Mat</label>
+                <input type="number" id="mat" placeholder="t.ex. 4000">
+            </div>
+
+            <div class="input-group">
+                <label>Försäkringar</label>
+                <input type="number" id="forsakring" placeholder="t.ex. 1000">
+            </div>
+
+            <div class="input-group">
+                <label>Övriga kostnader</label>
+                <input type="number" id="ovrigt" placeholder="t.ex. 3000">
+            </div>
+
+            <button onclick="raknaEkonomi()">
+                Räkna ut min ekonomi →
+            </button>
+
+        </div>
+
+        <div class="box">
+
+            <h2>Ditt resultat</h2>
+
+            <div class="result">
+
+                <div class="result-title">
+                    Pengar kvar varje månad
+                </div>
+
+                <div class="money" id="kvar">
+                    0 kr
+                </div>
+
+            </div>
+
+            <div class="summary">
+
+                <div class="summary-row">
+                    <span>Inkomst</span>
+                    <strong id="visInkomst">0 kr</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Totala kostnader</span>
+                    <strong id="visKostnader">0 kr</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Kvar efter kostnader</span>
+                    <strong id="visKvar">0 kr</strong>
+                </div>
+
+            </div>
+
+            <div class="tip" id="tips">
+                Fyll i dina uppgifter så räknar vi ut din ekonomi.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function raknaEkonomi() {
+
+    const inkomst = Number(document.getElementById("inkomst").value) || 0;
+    const boende = Number(document.getElementById("boende").value) || 0;
+    const bil = Number(document.getElementById("bil").value) || 0;
+    const mat = Number(document.getElementById("mat").value) || 0;
+    const forsakring = Number(document.getElementById("forsakring").value) || 0;
+    const ovrigt = Number(document.getElementById("ovrigt").value) || 0;
+
+    const kostnader =
+        boende +
+        bil +
+        mat +
+        forsakring +
+        ovrigt;
+
+    const kvar = inkomst - kostnader;
+
+    document.getElementById("visInkomst").textContent =
+        inkomst.toLocaleString("sv-SE") + " kr";
+
+    document.getElementById("visKostnader").textContent =
+        kostnader.toLocaleString("sv-SE") + " kr";
+
+    document.getElementById("visKvar").textContent =
+        kvar.toLocaleString("sv-SE") + " kr";
+
+    document.getElementById("kvar").textContent =
+        kvar.toLocaleString("sv-SE") + " kr";
+
+    if (kvar > 0) {
+        document.getElementById("tips").textContent =
+            "Du har pengar kvar efter dina angivna kostnader. Nästa steg blir att hjälpa dig se hur mycket du kan spara och vad olika ekonomiska förändringar skulle innebära.";
+    } else if (kvar === 0) {
+        document.getElementById("tips").textContent =
+            "Dina angivna kostnader motsvarar ungefär hela din månadsinkomst.";
+    } else {
+        document.getElementById("tips").textContent =
+            "Dina angivna kostnader är högre än din månadsinkomst. Här kan vi senare hjälpa dig hitta vilka kostnader som påverkar ekonomin mest.";
+    }
+}
+
+</script>
+
+</body>
+</html>
